@@ -11,7 +11,7 @@
 
     #define NUM_INDIVIDUOS 100
     #define TOP_K 5
-    #define MAXTIME 10000
+    #define MAXTIME 10000000000
     #define MUTATE_POWER 0.1 // potência da mutação 
 
     class Pacman;

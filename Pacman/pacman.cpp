@@ -6,7 +6,7 @@ Pacman::Pacman(int startX, int startY, const std::vector<int>& camadas, int obje
     : x(startX), y(startY), sX(startX),sY(startY), objetivoX(objetivoX), objetivoY(objetivoY), rede(camadas), step_count(0), fitness(0) {  
 }
 
-void Pacman::movePacman(Mapa& mapa, int maxTime, std::vector<Fantasma> fantasmas){
+void Pacman::movePacman(Mapa& mapa, double maxTime, std::vector<Fantasma> fantasmas){
     step_count += 1;
 
     std::vector<double> visao; // ou int

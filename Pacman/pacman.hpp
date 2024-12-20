@@ -32,7 +32,7 @@
         void reset();
 
         // Método para mover o Pacman
-        void movePacman(Mapa& mapa, int maxTime,std::vector<Fantasma> fantasmas);
+        void movePacman(Mapa& mapa, double maxTime,std::vector<Fantasma> fantasmas);
 
         Pacman mutate(double factor);
         Pacman crossover(Pacman &amiguinho); // brotheragem :3

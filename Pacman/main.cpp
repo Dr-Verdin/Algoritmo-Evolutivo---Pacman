@@ -35,13 +35,6 @@ int main() {
             for(int step = 0; step < MAXTIME; step++){ // numero de passos máximos 
                 //printf("Rodando indivíduo %d da geração %d:\n",i, geracao);
                 pop.individuos[i].movePacman(mapa, MAXTIME, fantasmas); // fantasmas no mapa
-                
-                /*morreu = mapa.tamorto(pop.individuos[i].y, pop.individuos[i].x, fantasmas);
-                if(morreu){
-                    printf("Degustado saborosamente\n\n");
-                    sleep(1);
-                    break;
-                }*/
 
                 //move os fantasmas
                 for(int k = 0; k < (int)fantasmas.size(); k++){
@@ -75,7 +68,6 @@ int main() {
             sleep(1);
         }
         geracao++;
-        mapa.geracao2 = geracao;
     }
 
     return 0;

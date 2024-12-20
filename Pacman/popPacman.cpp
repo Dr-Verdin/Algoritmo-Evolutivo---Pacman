@@ -11,17 +11,16 @@ Population::Population(int spawnX,int spawnY,const std::vector<int> camadas, int
 
 void Population::EvaluateSort(){
     for(size_t i = 0; i < individuos.size(); i++){
-        int x = individuos[i].x;
-        int y = individuos[i].y;
-        // calcular a distancia até o ponto
-        double distancia = std::sqrt((objetivo.x - x) * (objetivo.x - x) + (objetivo.y - y) * (objetivo.y - y));
+        Pacman& pac = individuos[i];
 
-        individuos[i].fitness = (distancia*0.85 + individuos[i].step_count*0.15);
+        double distancia = std::sqrt(std::pow(pac.x - objetivo.x, 2) + std::pow(pac.y - objetivo.y, 2));
+
+        pac.fitness = 1.0 / (distancia + pac.step_count);
     }
 
     // Ordenar a população pela distância (fitness) - menor distância é melhor
     std::sort(individuos.begin(), individuos.end(), [](const Pacman& a, const Pacman& b){
-        return a.fitness < b.fitness;
+        return a.fitness > b.fitness;
     });
 }
 
@@ -64,7 +63,6 @@ void Population::nextGen(){
     // passar os melhores para a próxima geração
     for(size_t i = 0; i < TOP_K; i++){
         newPop[i] = melhores[i];
-        newPop[i].reset();
     }
     // Atualiza a população
     individuos = std::move(newPop);

@@ -27,11 +27,9 @@
                 {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1},
                 {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
             };
-
-        int geracao2;
-
         bool collisionGrid[ROWS][COLS] = { false };
         float feromoniosGrid[ROWS][COLS] = { 0 };
+        
         bool checkCollision(int x, int y);
         void display(int playerY, int playerX, std::vector<Fantasma> fantasmas);
         bool tamorto(int playerY, int playerX, std::vector<Fantasma> fantasmas);
