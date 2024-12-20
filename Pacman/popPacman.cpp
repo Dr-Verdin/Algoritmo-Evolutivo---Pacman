@@ -15,7 +15,7 @@ void Population::EvaluateSort(){
 
         double distancia = std::sqrt(std::pow(pac.x - objetivo.x, 2) + std::pow(pac.y - objetivo.y, 2));
 
-        pac.fitness = 1.0 / (distancia + pac.step_count);
+        pac.fitness = 100.0 / (distancia*0.85 + pac.step_count*0.15);
     }
 
     // Ordenar a população pela distância (fitness) - menor distância é melhor

@@ -10,7 +10,6 @@
 
 int main() {
     Mapa mapa; // criação do mapa
-    /*1const std::vector<int> camadas = {11,6,2}; // camadas da rede neural*/
     const std::vector<int> camadas = {7,4,2}; // camadas da rede neural*/
     Population pop(1,5,camadas,17,1); // local que a população nasce
     
@@ -41,33 +40,37 @@ int main() {
                     fantasmas[k].moveFantasma(mapa, pop.individuos[i].y, pop.individuos[i].x);
                 }
                 
-                if(geracao>-1){
+                if(geracao>0 && i == 0){
+                    printf("melhor da geração %d: %.2f\n", geracao-1, pop.history[geracao-1]);
                     mapa.display(pop.individuos[i].y, pop.individuos[i].x, fantasmas); // desenha a grade atualizada
-                    //std::cout << "\n----------------------------------------------\n" << std::endl;
+                    std::cout << "\n----------------------------------------------\n" << std::endl;
                 }
 
                 // verifica se o pacman morreu (colidiu com um fantasma)
                 morreu = mapa.tamorto(pop.individuos[i].y, pop.individuos[i].x, fantasmas);
                 if(morreu){
-                    //printf("Degustado saborosamente\n\n");
+                    if(i == 0 && geracao>0)
+                        printf("Degustado saborosamente\n\n");
                     break;
                 }
-                //sleep(1);
+
+                if(i == 0 && geracao > 0)
+                    sleep(1);
             }
-            //sleep(1);
+            if(i == 0)
+                sleep(1);
         }
         // após todos os individuos da pop terem jogado passa para a proximo geração
         pop.nextGen();
-        //sleep(3);
-        // deppois que passa da geração 50 começa a impprimir o melhor pacman
-        if(geracao>-1){
-            printf("melhor da geração %d: %.2f\n", geracao, pop.history[geracao]);
-            if(pop.history[geracao]<10){
-                //sleep(15);
-            }
-            sleep(1);
-        }
+        sleep(3);
+        
+        pop.history[geracao] = pop.individuos[0].fitness;
         geracao++;
+
+        printf("\nHistorico de fitness:\n");
+        for(int j = 0; j < pop.history.size(); j++){
+            printf("%.2f\n", pop.history[j].fitness);
+        }
     }
 
     return 0;

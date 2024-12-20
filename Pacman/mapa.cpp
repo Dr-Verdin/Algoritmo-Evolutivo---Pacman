@@ -15,9 +15,9 @@ void Mapa::display(int playerY, int playerX, std::vector<Fantasma> fantasmas)  {
     for (int i = 0; i < ROWS; i++) { // linhas
         for (int j = 0; j < COLS; j++) { // coluna
             if (i == playerY && j == playerX){ // verifica se as coord correspondem as posições do personagens
-                //std::cout << "P "; // Desenha o player na posição atual
+                std::cout << "P "; // Desenha o player na posição atual
             } else if (collisionGrid[i][j]){
-                //std::cout << "X "; // Exibe "X" se houve colisão
+                std::cout << "X "; // Exibe "X" se houve colisão
                 collisionGrid[i][j] = false;
             }else{
                 bool tem_fantasma_aqui = false;
@@ -29,14 +29,14 @@ void Mapa::display(int playerY, int playerX, std::vector<Fantasma> fantasmas)  {
                 }
                 
                 if(tem_fantasma_aqui){
-                    //std::cout << "F ";
+                    std::cout << "F ";
                 }else{
-                    //std::cout << (grid[i][j] == 1 ? "1 " : "0 ");
+                    std::cout << (grid[i][j] == 1 ? "1 " : "0 ");
                 }
                 
             }
         }
-        //std::cout << std::endl; // nova linha da matriz
+        std::cout << std::endl; // nova linha da matriz
     }
 }
 
