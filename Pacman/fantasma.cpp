@@ -27,51 +27,55 @@ void Fantasma::moveFantasma(Mapa& mapa, int pacmanY, int pacmanX){
         }
     }
 
-    if(max_feromonio == 0){
-        xadd = -1;
-        yadd = -1;
-        // direita
-        for(int i = 0; mapa.grid[y + i][x] == 0; i++){
-            if(y + i == pacmanX && x == pacmanX){
+    if (max_feromonio == 0) {
+        xadd = 0;
+        yadd = 0;
+
+        // Direita
+        for (int i = 0; (y + i < ROWS) && mapa.grid[y + i][x] == 0; i++) {
+            if (y + i == pacmanY && x == pacmanX) {
                 xadd = 0;
                 yadd = 1;
                 break;
             }
         }
-        // esquerda
-        for(int i = 0; mapa.grid[y - i][x] == 0; i++){
-            if(y - i == pacmanX && x == pacmanX){
+
+        // Esquerda
+        for (int i = 0; (y - i >= 0) && mapa.grid[y - i][x] == 0; i++) {
+            if (y - i == pacmanY && x == pacmanX) {
                 xadd = 0;
                 yadd = -1;
                 break;
             }
         }
-        // cima
-        for(int i = 0; mapa.grid[y][x + i] == 0; i++){
-            if(y == pacmanY && x + i == pacmanX){
+
+        // Cima
+        for (int i = 0; (x + i < COLS) && mapa.grid[y][x + i] == 0; i++) {
+            if (y == pacmanY && x + i == pacmanX) {
                 xadd = 1;
                 yadd = 0;
                 break;
             }
         }
-        // baixo
-        for(int i = 0; mapa.grid[y][x - i] == 0; i++){
-            if(y == pacmanY && x - i == pacmanX){
+
+        // Baixo
+        for (int i = 0; (x - i >= 0) && mapa.grid[y][x - i] == 0; i++) {
+            if (y == pacmanY && x - i == pacmanX) {
                 xadd = -1;
                 yadd = 0;
                 break;
             }
         }
 
-        if(xadd == -1 && yadd == -1) {
-            // se não estiver com o pacman, move aleatoriamente
-            if(rand()%2==0){
-                xadd = (rand()%2)*2-1;
+        // Se não encontrou o Pac-Man, move aleatoriamente
+        if (xadd == 0 && yadd == 0) {
+            if (rand() % 2 == 0) {
+                xadd = (rand() % 2) * 2 - 1; // Aleatório -1 ou 1
                 yadd = 0;
-            }else{
+            } else {
                 xadd = 0;
-                yadd = (rand()%2)*2-1;
-            }   
+                yadd = (rand() % 2) * 2 - 1; // Aleatório -1 ou 1
+            }
         }
     }
 

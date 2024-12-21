@@ -68,9 +68,10 @@ int main() {
         geracao++;
 
         printf("\nHistorico de fitness:\n");
-        for(int j = 0; j < pop.history.size(); j++){
-            printf("%.2f\n", pop.history[j].fitness);
+        for(size_t j = 0; j < pop.history.size(); j++){
+            printf("%.2f\n", pop.history[j]);
         }
+        sleep(3);
     }
 
     return 0;
