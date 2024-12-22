@@ -10,13 +10,18 @@ Population::Population(int spawnX,int spawnY,const std::vector<int> camadas, int
 }
 
 void Population::EvaluateSort(){
+    int cont = 0;
     for(size_t i = 0; i < individuos.size(); i++){
-        Pacman& pac = individuos[i];
-
-        double distancia = std::sqrt(std::pow(pac.x - objetivo.x, 2) + std::pow(pac.y - objetivo.y, 2));
-
-        pac.fitness = 100.0 / (distancia*0.85 + pac.step_count*0.15);
+        double distancia = std::sqrt((individuos[i].x - objetivo.x)*(individuos[i].x - objetivo.x) + (individuos[i].y - objetivo.y)*(individuos[i].y - objetivo.y));
+        
+        if(distancia == 0){
+            cont++;
+            individuos[i].fitness = 101.0; 
+        } else {
+            individuos[i].fitness = (100.0 / distancia);
+        }
     }
+    printf("\nChegou ao objetivo: %d\n", cont);
 
     // Ordenar a população pela distância (fitness) - menor distância é melhor
     std::sort(individuos.begin(), individuos.end(), [](const Pacman& a, const Pacman& b){

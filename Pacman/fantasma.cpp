@@ -31,44 +31,46 @@ void Fantasma::moveFantasma(Mapa& mapa, int pacmanY, int pacmanX){
         xadd = 0;
         yadd = 0;
 
-        // Direita
-        for (int i = 0; (y + i < ROWS) && mapa.grid[y + i][x] == 0; i++) {
-            if (y + i == pacmanY && x == pacmanX) {
-                xadd = 0;
-                yadd = 1;
-                break;
+        if(pacmanY == y){
+            // Movimento na mesma linha (horizontal)
+            if(pacmanX > x){
+                // Pac-Man está à direita
+                for (int i = 1; (x + i < COLS) && mapa.grid[y][x + i] == 0; i++) {
+                    if (y == pacmanY && x + i == pacmanX) {
+                        xadd = 1; // Move para a direita
+                        break;
+                    }
+                }
+            } else if(pacmanX < x){
+                // Pac-Man está à esquerda
+                for (int i = 1; (x - i >= 0) && mapa.grid[y][x - i] == 0; i++) {
+                    if (y == pacmanY && x - i == pacmanX) {
+                        xadd = -1; // Move para a esquerda
+                        break;
+                    }
+                }
             }
-        }
-
-        // Esquerda
-        for (int i = 0; (y - i >= 0) && mapa.grid[y - i][x] == 0; i++) {
-            if (y - i == pacmanY && x == pacmanX) {
-                xadd = 0;
-                yadd = -1;
-                break;
+        } else if(pacmanX == x){
+            // Movimento na mesma coluna (vertical)
+            if(pacmanY > y){
+                // Pac-Man está abaixo
+                for (int i = 1; (y + i < ROWS) && mapa.grid[y + i][x] == 0; i++) {
+                    if (y + i == pacmanY && x == pacmanX) {
+                        yadd = 1; // Move para baixo
+                        break;
+                    }
+                }
+            } else if(pacmanY < y){
+                // Pac-Man está acima
+                for (int i = 1; (y - i >= 0) && mapa.grid[y - i][x] == 0; i++) {
+                    if (y - i == pacmanY && x == pacmanX) {
+                        yadd = -1; // Move para cima
+                        break;
+                    }
+                }
             }
-        }
-
-        // Cima
-        for (int i = 0; (x + i < COLS) && mapa.grid[y][x + i] == 0; i++) {
-            if (y == pacmanY && x + i == pacmanX) {
-                xadd = 1;
-                yadd = 0;
-                break;
-            }
-        }
-
-        // Baixo
-        for (int i = 0; (x - i >= 0) && mapa.grid[y][x - i] == 0; i++) {
-            if (y == pacmanY && x - i == pacmanX) {
-                xadd = -1;
-                yadd = 0;
-                break;
-            }
-        }
-
-        // Se não encontrou o Pac-Man, move aleatoriamente
-        if (xadd == 0 && yadd == 0) {
+        } else{
+            // Se não encontrou o Pac-Man, move aleatoriamente
             if (rand() % 2 == 0) {
                 xadd = (rand() % 2) * 2 - 1; // Aleatório -1 ou 1
                 yadd = 0;
@@ -76,6 +78,16 @@ void Fantasma::moveFantasma(Mapa& mapa, int pacmanY, int pacmanX){
                 xadd = 0;
                 yadd = (rand() % 2) * 2 - 1; // Aleatório -1 ou 1
             }
+        }
+    }
+
+    if(xadd == 0 && yadd == 0) {
+        if (rand() % 2 == 0) {
+            xadd = (rand() % 2) * 2 - 1; // Aleatório -1 ou 1
+            yadd = 0;
+        } else {
+            xadd = 0;
+            yadd = (rand() % 2) * 2 - 1; // Aleatório -1 ou 1
         }
     }
 

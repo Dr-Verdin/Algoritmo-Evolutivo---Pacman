@@ -16,8 +16,8 @@ int main() {
     // local onde os fantasmas nascem
     Fantasma fantasma1(9,4);
     Fantasma fantasma2(10,5);
-    Fantasma fantasma3(8,5);
-    Fantasma fantasma4(9,5);
+    Fantasma fantasma3(9,9);
+    Fantasma fantasma4(4,1);
     std::vector<Fantasma> fantasmas = {fantasma1,fantasma2,fantasma3,fantasma4}; // armazenados nesse vetor
 
     int geracao = 0; // inicializa um contador de gerações
@@ -31,6 +31,7 @@ int main() {
             }
 
             bool morreu = false;
+
             for(int step = 0; step < MAXTIME; step++){ // numero de passos máximos 
                 //printf("Rodando indivíduo %d da geração %d:\n",i, geracao);
                 pop.individuos[i].movePacman(mapa, MAXTIME, fantasmas); // fantasmas no mapa
@@ -40,7 +41,7 @@ int main() {
                     fantasmas[k].moveFantasma(mapa, pop.individuos[i].y, pop.individuos[i].x);
                 }
                 
-                if(geracao>0 && i == 0){
+                if(geracao>0 && i == 0 && pop.history[geracao-1] == 101){
                     printf("melhor da geração %d: %.2f\n", geracao-1, pop.history[geracao-1]);
                     mapa.display(pop.individuos[i].y, pop.individuos[i].x, fantasmas); // desenha a grade atualizada
                     std::cout << "\n----------------------------------------------\n" << std::endl;
@@ -49,16 +50,18 @@ int main() {
                 // verifica se o pacman morreu (colidiu com um fantasma)
                 morreu = mapa.tamorto(pop.individuos[i].y, pop.individuos[i].x, fantasmas);
                 if(morreu){
-                    if(i == 0 && geracao>0)
+                    if(i == 0 && geracao>0 && pop.history[geracao-1] == 101)
                         printf("Degustado saborosamente\n\n");
+                    pop.individuos[i].reset();
                     break;
                 }
 
-                if(i == 0 && geracao > 0)
+                if(i == 0 && geracao > 0 && pop.history[geracao-1] == 101)
                     sleep(1);
             }
             if(i == 0)
                 sleep(1);
+            mapa.reset(); // reseta o mapa para o próximo episódio
         }
         // após todos os individuos da pop terem jogado passa para a proximo geração
         pop.nextGen();
@@ -69,7 +72,7 @@ int main() {
 
         printf("\nHistorico de fitness:\n");
         for(size_t j = 0; j < pop.history.size(); j++){
-            printf("%.2f\n", pop.history[j]);
+            printf("%ld - %.2f\n", j, pop.history[j]);
         }
         sleep(3);
     }
