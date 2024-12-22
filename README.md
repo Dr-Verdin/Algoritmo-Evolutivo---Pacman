@@ -14,7 +14,7 @@ O mapa do projeto foi inspirado em uma das versões clássicas do jogo Pacman. E
 
 Abaixo está uma representação visual do mapa utilizado, que se baseia em uma versão do jogo original:
 
-// Imagem do mapa
+<img src="./imagens/mapas.png">
 
 No projeto, o arquivo que contém o mapa não apenas define a matriz que representa o labirinto, mas também imprime o estado do jogo em tempo real, mostrando os passos do Pacman e dos fantasmas. Além disso, o arquivo exibe colisões com as paredes (representadas pela letra "X") e interrompe o jogo caso o Pacman seja capturado por um fantasma (ou seja, quando o Pacman e um fantasma ocupam o mesmo espaço no mapa).
 
@@ -60,6 +60,8 @@ Depois, calcula-se a diferença entre a posição atual do Pacman (no eixo x) e 
 
 Os 6 números anteriores, somados ao tempo total do jogo (gerando um total de 7 números), são enviados para a rede neural do Pacman. A rede possui 7 neurônios de entrada e retorna 2 valores (dois neurônios de saída). Esses dois valores são dx e dy, que determinam como o Pacman irá se mover.
 
+<img src="./imagens/rede.png">
+
 ### Filtragem de movimento:
         
 A filtragem do movimento é feita seguindo os seguintes passos:
@@ -75,3 +77,19 @@ Após o movimento, a posição do Pacman é registrada na grade de feromônios, 
 Dentro do código do Pacman, também é importante destacar duas funções chamadas crossover e mutação, que são utilizadas pelo algoritmo genético para criar novas gerações. Esses conceitos serão explicados a seguir.
 
 ## Algoritmo Genetico
+
+## Análise das Saídas
+
+<img src="./imagens/grafico.png">
+
+## Vídeo sobre o projeto
+
+[link do vídeo no Youtube](https://youtu.be/).
+
+## Agradecimentos
+
+Agradeço ao excelentíssimo professor Eduardo do Valle Simões, vulgo [Simões Poderoso :robot:](https://gitlab.com/simoesusp), que me auxiliou na execução desse projeto e ao meu veterano "[Bom Dia :sun_with_face:](https://github.com/mpferreira003)" que me ajudou à finalizá-lo.
+
+## Alunos
+
+- Camila Piscioneri Magalhães ([Dr. Verdin :seedling:](https://github.com/Dr-Verdin)).
