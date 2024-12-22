@@ -78,13 +78,23 @@ Dentro do código do Pacman, também é importante destacar duas funções chama
 
 ## Algoritmo Genetico
 
+O algoritmo genético (AG) é utilizado para selecionar os melhores indivíduos de uma população, com o objetivo de criar uma nova geração com um desempenho superior, ou seja, com valores de fitness melhores do que os da geração anterior.
+
+Após avaliar a população, com base na distância de cada indivíduo em relação ao objetivo desejado, os 5 melhores indivíduos são selecionados. A partir desses indivíduos, uma nova população é gerada utilizando os operadores de crossover e mutação, que ocorrem de forma aleatória.
+
+Um ponto crucial a ser destacado é que o AG seleciona os melhores pesos, que são os valores atribuídos às conexões entre os neurônios de uma rede neural. Esses pesos têm um papel fundamental no desempenho final da rede. Para que o resultado seja satisfatório, os pesos precisam ser adequados, e é exatamente isso que o AG faz: ele seleciona e aprimora os melhores pesos, garantindo assim a evolução para uma solução mais eficaz.
+
+<img src="./imagens/rede.png">
+
 ## Análise das Saídas
+
+A seguir está o gráfico de uma saída (saída média) dos resultados do projeto e sua evolução ao decorrer das gerações:
 
 <img src="./imagens/grafico.png">
 
 ## Vídeo sobre o projeto
 
-[link do vídeo no Youtube](https://youtu.be/).
+[link do vídeo no Youtube](https://youtu.be/bWFl-Bnv-as).
 
 ## Agradecimentos
 
